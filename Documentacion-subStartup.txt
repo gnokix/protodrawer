@@ -1,21 +1,33 @@
 Documentacion de subrutina startup()
-
-Supuestos:
-    Damos por supuesto que los archivos CNC ponen en 0 en el lugar donde las rectas se 
-cruzan tal como en los ejercicios matematicos,este supuesto debera ser corroborado, 
-aunque a efectos de ir avanzando con la logica del programa iremos desarrollando.
-
-Tambien damos por supuesto en esta etapa que los ejes X e Y tendran el mismo recorrido, 
-esta situacion podria cambiar, es importante documentar este cambio ya que podria 
-afectar la logica del programa.
+Version 0.01
+Cambios:    Propuesta de cambio en la logica de inicializacion del cnc y ubicacion de final de la herramienta.
+            Cambio en el orden de los titulos, Se agrega el titulo Metodo y se separa el Objetivo del Metodo.
 
 Objetivo:
     El objetivo de esta subrutina es encontrar la posicion central o cero de los ejes
-cartesianos X e Y, para lo cual primero recorreremos el camino con ambos motores hacia
+cartesianos X e Y.
+
+Metodo:
+    Para lo cual primero recorreremos el camino con ambos motores hacia
  un extremo sin llevar la cuenta de los pasos, al encontrarlo, recoreremos el camino hasta
  el final del recorrido, tomando nota de la cantidad de pasos realizados, con ellos
 moveremos la herramineta hasta la mitad del valor anotado, ahora sabremos que ese
  valor/2 hacia un lado u otro son los extremos del recorrido.
+ 
+Supuestos:
+    Damos por supuesto que los archivos CNC ponen en 0 en el lugar donde las rectas se 
+cruzan tal como en los ejercicios matematicos,este supuesto debera ser corroborado, 
+aunque a efectos de ir avanzando con la logica del programa iremos desarrollando.
+ -Gnokix- Propongo mofificar esta parte de la logica, arrancar desde el final y llevar al 
+ inicio, me imagino el proceso de fresado de un objeto arrancando desde el centro del 
+ objeto, la heramienta no podria iniciar el corte, como lo ves? 
+ 
+
+Tambien damos por supuesto en esta etapa que los ejes X e Y tendran el mismo recorrido, 
+si bien cada motoro sera sincronizado por separado es importante documentar esto ya que podria 
+afectar la logica del programa.
+
+
 
 Comentarios:
     La idea es mover los dos motores a la vez, aunque sabemos que arduino no hara eso, por
