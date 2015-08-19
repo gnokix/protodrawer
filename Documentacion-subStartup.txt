@@ -1,0 +1,54 @@
+Documentacion de subrutina startup()
+
+Supuestos:
+    Damos por supuesto que los archivos CNC ponen en 0 en el lugar donde las rectas se 
+cruzan tal como en los ejercicios matematicos,este supuesto debera ser corroborado, 
+aunque a efectos de ir avanzando con la logica del programa iremos desarrollando.
+
+Tambien damos por supuesto en esta etapa que los ejes X e Y tendran el mismo recorrido, 
+esta situacion podria cambiar, es importante documentar este cambio ya que podria 
+afectar la logica del programa.
+
+Objetivo:
+    El objetivo de esta subrutina es encontrar la posicion central o cero de los ejes
+cartesianos X e Y, para lo cual primero recorreremos el camino con ambos motores hacia
+ un extremo sin llevar la cuenta de los pasos, al encontrarlo, recoreremos el camino hasta
+ el final del recorrido, tomando nota de la cantidad de pasos realizados, con ellos
+moveremos la herramineta hasta la mitad del valor anotado, ahora sabremos que ese
+ valor hacia un lado u otro son los extremos del recorrido.
+
+Comentarios:
+    La idea es mover los dos motores a la vez, aunque sabemos que arduino no hara eso, por
+lo que hay que controlar un motor despues de otro, tambien hay que tener en cuenta que es 
+posible que ambos motores lleguen en distinto tiempo, por lo que habra que controlar los 
+estados de forma independiente.
+
+Descripcion del codigo a alto nivel:
+
+01) Definimos las variables locales que sean necesarias.
+
+02) Entramos en loop hasta que ambos motores alcancen el primer extremo, la interrupcion
+de fin de recorrido indicara si se ha llega si se ha llegado a un extremo y cambiaria el 
+valor de la variable global correspondiente. 
+
+03) Si motor1 no alcanzo el fin, mover motor1 un paso negativo.
+04) Si motor2 no alcanzo el fin, mover motor2 un paso negativo.
+
+05) una vez llevados los dos motores al inicio del recorrido, cambiamos los valores de la 
+variable de fin de recorrido, de forma que podamos volver a mover los motores.
+
+06) Entramos en loop hasta que ambos motores alcancen el segundo extremo, la interrupcion
+de fin de recorrido indicara si se ha llega si se ha llegado a un extremo y cambiaria el 
+valor de la variable global correspondiente.
+
+07) Si motor1 no alcanzo el fin, mover motor1 un paso positivo, pos_motor1=pos_motor1+1.
+08) Si motor2 no alcanzo el fin, mover motor2 un paso positivo, pos_motor2=pos_motor1+2.
+
+09) una vez llevados los dos motores al final del recorrido, cambiamos los valores de la 
+variable de fin de recorrido, de forma que podamos volver a mover los motores,  con esta 
+informacion tambien setearemos las variables min/max X/Y.
+
+10) Si motor1 no alcanzo el fin, mover motor1 a la ubicacion pos_motor1/2. 
+11) Si motor2 no alcanzo el fin, mover motor2 a la ubicacion pos_motor1/2.
+
+* Indicamos mediante una variable que el equipo esta disponible para recibir informacion de ruteo.
